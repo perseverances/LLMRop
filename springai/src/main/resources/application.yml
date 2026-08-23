@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: LLMmentor
+  ai:
+    dashscope:
+      api-key: sk-ws-H.EELEXIX.VOWA.MEYCIQCjFr_QVcJHN__rHEDmQjFHTYxCIJ9PQljH4FhLWWFEjwIhAI0Hts9hfZKX0P-_hO355uUDh8I8pg4ye4UcN7WAxJzI
+#      model: qwen3.7-plus
+
+
+server:
+  port: 8000
