@@ -1,6 +1,5 @@
 package cn.ances.llm.LLMmentor.controller;
 
-import cn.ances.llm.LLMmentor.model.Book;
 import cn.ances.llm.LLMmentor.model.BookRecord;
 import com.alibaba.cloud.ai.dashscope.chat.DashScopeChatOptions;
 import org.slf4j.Logger;
@@ -10,7 +9,6 @@ import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.chat.prompt.PromptTemplate;
 import org.springframework.ai.converter.BeanOutputConverter;
-import org.springframework.ai.converter.ListOutputConverter;
 import org.springframework.ai.converter.MapOutputConverter;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +41,7 @@ public class StructOutputController implements InitializingBean {
     }
 
     @RequestMapping("/call")
-    public String call(String message) {
+    public String call() {
 
         PromptTemplate promptTemplate = PromptTemplate.builder().template("请给我推荐基本心理学有关的书，输出格式：{format}").build();
 
