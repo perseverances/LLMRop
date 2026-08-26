@@ -5,7 +5,17 @@ spring:
     dashscope:
       api-key: sk-ws-H.EELEXIX.VOWA.MEYCIQCjFr_QVcJHN__rHEDmQjFHTYxCIJ9PQljH4FhLWWFEjwIhAI0Hts9hfZKX0P-_hO355uUDh8I8pg4ye4UcN7WAxJzI
 #      model: qwen3.7-plus
-
+    chat:
+      memory:
+        repository:
+          jdbc:
+            platform: mysql
+            initialize-schema: always
+  datasource:
+    url: jdbc:mysql://127.0.0.1/mysql?useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password:
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
 server:
   port: 8000

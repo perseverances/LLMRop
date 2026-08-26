@@ -21,7 +21,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/prompt/template")
-public class PromptTemplateControler implements InitializingBean {
+public class PromptTemplateController implements InitializingBean {
 
     @Autowired
     private ChatModel chatModel;
