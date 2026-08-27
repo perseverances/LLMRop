@@ -20,7 +20,7 @@ import reactor.core.publisher.Flux;
 public class ChatClientController implements InitializingBean {
 
     @Autowired
-    private ChatModel chatModel;
+    private ChatModel dashScopeChatModel;
 
 //    DefaultChatClientBuilder  需要传可观测性参数
 
@@ -60,7 +60,7 @@ public class ChatClientController implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception{
-        chatClient = ChatClient.builder(chatModel)
+        chatClient = ChatClient.builder(dashScopeChatModel)
                 // 实现 Logger 的 Advisor
                 .defaultAdvisors(
                         new SimpleLoggerAdvisor()

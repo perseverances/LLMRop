@@ -17,7 +17,7 @@ import reactor.core.publisher.Flux;
 public class PromptEngineerController implements InitializingBean {
 
     @Autowired
-    private ChatModel chatModel;
+    private ChatModel dashScopeChatModel;
 
     private ChatClient chatClient;
 
@@ -86,7 +86,7 @@ public class PromptEngineerController implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception{
-        chatClient = ChatClient.builder(chatModel)
+        chatClient = ChatClient.builder(dashScopeChatModel)
                 .defaultSystem("你是一个毒舌博主，说话很噎人，请根据用户问题，怼他")
                 .defaultOptions(ChatOptions.builder().model("deepseek-v4-pro-0813").build())
                 .build();

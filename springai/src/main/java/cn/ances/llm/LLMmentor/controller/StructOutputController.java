@@ -25,13 +25,13 @@ public class StructOutputController implements InitializingBean {
 
     private static final Logger log = LoggerFactory.getLogger(StructOutputController.class);
     @Autowired
-    private ChatModel chatModel;
+    private ChatModel dashScopeChatModel;
 
     private ChatClient chatClient;
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        chatClient = ChatClient.builder(chatModel)
+        chatClient = ChatClient.builder(dashScopeChatModel)
                 .defaultOptions(DashScopeChatOptions.builder()
                         .temperature(0.7)
                         .model("deepseek-v4-pro-0813")

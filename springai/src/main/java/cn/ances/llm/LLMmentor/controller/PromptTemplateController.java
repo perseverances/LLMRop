@@ -24,13 +24,13 @@ import java.util.Map;
 public class PromptTemplateController implements InitializingBean {
 
     @Autowired
-    private ChatModel chatModel;
+    private ChatModel dashScopeChatModel;
 
     private ChatClient chatClient;
 
     @Override
     public void afterPropertiesSet() throws Exception{
-        chatClient = ChatClient.builder(chatModel)
+        chatClient = ChatClient.builder(dashScopeChatModel)
                 // 设置 ChatClient 中 ChatModel 的 Options 参数
                 .defaultOptions(
                         DashScopeChatOptions.builder()

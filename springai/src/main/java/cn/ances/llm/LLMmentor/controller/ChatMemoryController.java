@@ -29,7 +29,7 @@ import java.util.List;
 public class ChatMemoryController implements InitializingBean {
 
     @Autowired
-    private ChatModel chatModel;
+    private ChatModel dashScopeChatModel;
 
     private ChatClient chatClient;
 
@@ -42,7 +42,7 @@ public class ChatMemoryController implements InitializingBean {
         //maxMessage，非常明确。用户、system都是message
 //        ChatMemory chatMemory = MessageWindowChatMemory.builder().maxMessages(7).build();
 
-        chatClient = ChatClient.builder(chatModel)
+        chatClient = ChatClient.builder(dashScopeChatModel)
                 .defaultAdvisors(MessageChatMemoryAdvisor.builder(chatMemory).build(), new SimpleLoggerAdvisor())         //实现Logger 的 Advisor
                 .defaultSystem("请用英文回答问题，然后另起一段，做出中文翻译的回答")
                 .defaultOptions(DashScopeChatOptions.builder()
@@ -60,7 +60,7 @@ public class ChatMemoryController implements InitializingBean {
         //第一轮对话
         messages.add(new SystemMessage("你是一个游戏设计师"));
         messages.add(new UserMessage("我想设计一个回合制游戏"));
-        ChatResponse chatResponse = chatModel.call(Prompt.builder()
+        ChatResponse chatResponse = dashScopeChatModel.call(Prompt.builder()
                 .messages(messages)
                 .chatOptions(ChatOptions.builder().model("deepseek-v4-pro-0813").build())
                 .build()
@@ -73,7 +73,7 @@ public class ChatMemoryController implements InitializingBean {
 
         //第二轮对话
         messages.add(new UserMessage("能帮我结合一些二次元的元素吗?"));
-        chatResponse = chatModel.call(Prompt.builder()
+        chatResponse = dashScopeChatModel.call(Prompt.builder()
                 .messages(messages)
                 .chatOptions(ChatOptions.builder().model("deepseek-v4-pro-0813").build())
                 .build()
@@ -91,13 +91,13 @@ public class ChatMemoryController implements InitializingBean {
                 .messages(messages)
                 .chatOptions(ChatOptions.builder().model("deepseek-v4-pro-0813").build())
                 .build();
-        chatModel.call(Prompt.builder()
+        dashScopeChatModel.call(Prompt.builder()
                 .messages(messages)
                 .chatOptions(ChatOptions.builder().model("deepseek-v4-pro-0813").build())
                 .build()
         );
 
-        return chatModel.call(prompt).getResult().getOutput().getText();
+        return dashScopeChatModel.call(prompt).getResult().getOutput().getText();
     }
 
 
@@ -120,7 +120,7 @@ public class ChatMemoryController implements InitializingBean {
         Prompt prompt = Prompt.builder().messages(messages)
                 .chatOptions(ChatOptions.builder().model("deepseek-v4-pro-0813").build())
                 .build();
-        return chatModel.call(prompt).getResult().getOutput().getText();
+        return dashScopeChatModel.call(prompt).getResult().getOutput().getText();
     }
 
     //通过chat_memory_conversation_id

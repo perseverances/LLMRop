@@ -18,7 +18,7 @@ import reactor.core.publisher.Flux;
 public class JdbcChatMemoryController implements InitializingBean {
 
     @Autowired
-    private ChatModel chatModel;
+    private ChatModel dashScopeChatModel;
 
     private ChatClient chatClient;
 
@@ -29,7 +29,7 @@ public class JdbcChatMemoryController implements InitializingBean {
     @Override
     public void afterPropertiesSet() throws Exception {
 
-        chatClient = ChatClient.builder(chatModel)
+        chatClient = ChatClient.builder(dashScopeChatModel)
                 .defaultAdvisors(MessageChatMemoryAdvisor.builder(jdbcChatMemory).build(), new SimpleLoggerAdvisor())         //实现Logger 的 Advisor
                 .defaultSystem("请用英文回答问题，然后另起一段，做出中文翻译的回答")
                 .defaultOptions(DashScopeChatOptions.builder()
