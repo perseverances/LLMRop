@@ -8,7 +8,7 @@ spring:
         model: deepseek-r1:1.5b
     dashscope:
       api-key: sk-ws-H.EELEXIX.VOWA.MEYCIQCjFr_QVcJHN__rHEDmQjFHTYxCIJ9PQljH4FhLWWFEjwIhAI0Hts9hfZKX0P-_hO355uUDh8I8pg4ye4UcN7WAxJzI
-#      model: qwen3.7-plus
+#      model: qwen3.7-plus  deepseek-v4-pro-0813
     chat:
       memory:
         repository:
