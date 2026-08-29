@@ -1,5 +1,6 @@
 package cn.ances.llm.LLMmentor.controller;
 
+import cn.ances.llm.LLMmentor.service.TimeTools;
 import com.alibaba.cloud.ai.dashscope.chat.DashScopeChatModel;
 import com.alibaba.cloud.ai.dashscope.chat.DashScopeChatOptions;
 import jakarta.annotation.PostConstruct;
@@ -37,5 +38,12 @@ public class FunctionCallController {
                 .defaultAdvisors(MessageChatMemoryAdvisor.builder(chatMemory).build())
                 .defaultOptions(DashScopeChatOptions.builder().model("deepseek-v4-pro-0813").build())
                 .build();
+    }
+
+    @GetMapping("/chat1")
+    public String chat1(@RequestParam("query") String query) {
+        System.out.println("chat request => " + query);
+
+        return chatClient.prompt().tools(new TimeTools()).user(query).call().content();
     }
 }
